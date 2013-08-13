@@ -14,44 +14,43 @@ return(!i||i!==r&&!b.contains(r,i))&&(e.type=o.origType,n=o.handler.apply(this,a
 
 	<script>
 		(function($){
-		    $.fn.rSelect = function(){	    	
-			    return this.each(function(){	
-			        var itens = $(this).children();
-			        var totalItens = itens.length;
-			        var result = "";		      
+                                    $.fn.rSelect = function(){
+                                        return this.each(function(){
+                                        var itens = $(this).children();
+                                        var totalItens = itens.length;
+                                        var result = "";
 
-			        for(var i=0; i < (totalItens); i++){
-			        	result += '<li>'+ itens.eq(i).html() +'</li>' + "\n";		        			        	
-			        }
+                                    for(var i=0; i < (totalItens); i++){
+                                        result += '<li class="item">'+ itens.eq(i).html() +'</li>' + "\n";
+                                    }
 
-			        $(this).replaceWith(
-			        	'<div class="select-generic"> ' +
-			        		'<span class="title">'+ $(this).find("option").eq(0).html() +'</span>' +
-				        	'<div class="ctn-list">' +
-					        	'<ul class="list">' +
-					        		result +
-					        	'</ul>' +
-					        '</div>' +
+                                    $(this).replaceWith(
+                                        '<div class="select-generic"> ' +
+                                        '<span class="title">'+ $(this).find("option").eq(0).html() +'</span>' +
+                                        '<div class="ctn-list">' +
+                                        '<ul class="list">' +
+                                        result +
+                                        '</ul>' +
+                                        '</div>' +
+                                            this.outerHTML +
+                                        '</div>'
+                                    );
 
-				        	this.outerHTML +
-			        	'</div>'
-		        	);	    
+                                    $('.select-generic .list .item').click(function(){
+                                        var index = $(this).index();
+                                        $(this).parents('.select-generic').find(".title").html($(this).html());
+                                        $(this).parents('.select-generic').find('option').removeAttr('selected');
+                                        $(this).parents('.select-generic').find('option').eq(index).attr('selected', 'selected');
+                                        $('.select-generic .ctn-list').hide();
+                                    });
 
-		        	$('.select-generic .list li').click(function(){
-			 			var index = $(this).index();
-			 			$(this).parents('.select-generic').find(".title").html($(this).html());
-			 			$(this).parents('.select-generic').find('option').removeAttr('selected');
-			 			$(this).parents('.select-generic').find('option').eq(index).attr('selected', 'selected');
-			 			$('.select-generic .ctn-list').hide();
-			 		});
-
-			 		$('.select-generic .title').click(function(){
-			 			$('.select-generic .ctn-list').hide();
-			 			$(this).parents('.select-generic').find(".ctn-list").show();
-			 		});    	
-			    });
-		    };
-		})(jQuery);
+                                    $('.select-generic .title').click(function(){
+                                        $('.select-generic .ctn-list').hide();
+                                            $(this).parents('.select-generic').find(".ctn-list").show();
+                                        });
+                                    });
+                                };
+                                })(jQuery);
 	</script>
 
 	<script>
